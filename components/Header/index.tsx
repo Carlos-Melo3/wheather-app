@@ -8,17 +8,30 @@ interface HeaderProps {
   value?: string;
   onKeyDown?: (event: any) => void;
   disabled?: boolean;
-};
+}
 
-export default function Header({date, onChange, placeholder, value, onKeyDown, disabled}: HeaderProps) {
+export default function Header({
+  date,
+  onChange,
+  placeholder,
+  value,
+  onKeyDown,
+  disabled,
+}: HeaderProps) {
   return (
     <>
       <div className={styles.header}>
         <div className={styles.dayAndTime}>
           <h2 className={styles.date}>{date}</h2>
         </div>
-        <TextField value={value} onChange={onChange} placeholder={placeholder} onKeyDown={onKeyDown} disabled={disabled}/>
+        <TextField
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          onKeyDown={onKeyDown}
+          disabled={disabled}
+        />
       </div>
     </>
-  )
-};
+  );
+}

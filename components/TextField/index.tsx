@@ -6,12 +6,25 @@ interface TextFieldProps {
   value?: string;
   onKeyDown?: (event: any) => void;
   disabled?: boolean;
-};
+}
 
-export default function TextField({onChange, placeholder, value, onKeyDown, disabled}: TextFieldProps) {
+export default function TextField({
+  onChange,
+  placeholder,
+  value,
+  onKeyDown,
+  disabled,
+}: TextFieldProps) {
   return (
     <>
-      <input className={styles.search} value={value} onChange={onChange} placeholder={placeholder} onKeyDown={onKeyDown} disabled={disabled}/>
+      <input
+        className={styles.search}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        onKeyDown={onKeyDown}
+        disabled={disabled}
+      />
     </>
-  )
-};
+  );
+}
