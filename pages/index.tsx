@@ -4,6 +4,7 @@ import TextField from "@/components/TextField";
 import { WheatherInfo } from "@/config/interface";
 import { searchChosenCity } from "@/utils/city";
 import {
+  getDescriptionPortuguese,
   getSearchIcon,
   getSunriseAndSunset,
   getWeekAndTime,
@@ -59,6 +60,7 @@ export default function Home() {
       wheather.coord.lon
     )[1];
     const climate = getSearchIcon(wheather.weather[0].icon);
+    const description = getDescriptionPortuguese(wheather.weather[0].description);
 
     return (
       <>
@@ -67,7 +69,7 @@ export default function Home() {
             <h1>
               {wheather.name}, {wheather.sys.country}
             </h1>
-            <p>{wheather.weather[0].description}</p>
+            <p className="description">{description}</p>
             <div className="img-card">
               <div className="content-img">
                 <img className="wheather-icon" src={climate} />

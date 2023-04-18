@@ -10,6 +10,7 @@ body {
   justify-content: center;
   align-items: center;
   width: 100vw;
+  min-width: 700px;
   min-height: 100vh;
   background-image: radial-gradient(circle 993px at .5% 50.5%,rgba(137,171,245,.37) 0,#f5f7fc 100.2%);
   font-family: Calibri, sans-serif;
@@ -61,6 +62,11 @@ a {
   position: relative;
   box-sizing: border-box;
   margin: 0px;
+}
+
+.description {
+  font-size: 24px;
+  color: #101010;
 }
 
 .content-img {
@@ -138,6 +144,7 @@ h1 {
 
 p {
   font-size: 18px;
+  letter-spacing: -0.075em;
 }
 
 .screen {
