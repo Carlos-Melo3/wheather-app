@@ -27,25 +27,28 @@ export const getSunriseAndSunset = (
   const sunriseDate = new Date(sunrise * 1000);
   const sunsetDate = new Date(sunset * 1000);
 
-  const differenceInHours = Math.trunc((lon + 47.91) / 15);
+  const differenceInHours = Math.trunc((lon + 47.9297) / 15);
   console.log(differenceInHours);
 
   const sunriseHours =
     sunriseDate.getHours() + differenceInHours <= 24
       ? sunriseDate.getHours() + differenceInHours
       : sunriseDate.getHours() - differenceInHours;
-  const additionOfZero = sunriseHours < 10 ? "0" + sunriseHours : sunriseHours;
+  const SunriseAdditionOfZero = sunriseHours < 10 ? "0" + sunriseHours : sunriseHours;
   const sunriseMinutes =
     sunriseDate.getMinutes() < 10
       ? "0" + sunriseDate.getMinutes()
       : sunriseDate.getMinutes();
-  const sunsetHours = sunsetDate.getHours() + differenceInHours;
+  const sunsetHours = sunsetDate.getHours() + differenceInHours < 0
+    ? 24 + differenceInHours
+    : sunsetDate.getHours() + differenceInHours;
+  const SunsetAdditionOfZero = sunsetHours < 10 ? "0" + sunsetHours : sunsetHours;
   const sunsetMinutes =
     sunsetDate.getMinutes() < 10
       ? "0" + sunsetDate.getMinutes()
       : sunsetDate.getMinutes();
-  const sunriseTime = additionOfZero + ":" + sunriseMinutes;
-  const sunsetTime = sunsetHours + ":" + sunsetMinutes;
+  const sunriseTime = SunriseAdditionOfZero + ":" + sunriseMinutes;
+  const sunsetTime = SunsetAdditionOfZero + ":" + sunsetMinutes;
   return [sunriseTime, sunsetTime];
 };
 
