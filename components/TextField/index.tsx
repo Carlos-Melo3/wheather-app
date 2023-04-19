@@ -6,6 +6,8 @@ interface TextFieldProps {
   value?: string;
   onKeyDown?: (event: any) => void;
   disabled?: boolean;
+  onClick?: () => void;
+  onBlur?: () => void;
 }
 
 export default function TextField({
@@ -14,6 +16,8 @@ export default function TextField({
   value,
   onKeyDown,
   disabled,
+  onClick,
+  onBlur,
 }: TextFieldProps) {
   return (
     <>
@@ -24,6 +28,8 @@ export default function TextField({
         placeholder={placeholder}
         onKeyDown={onKeyDown}
         disabled={disabled}
+        onClick={onClick}
+        onBlur={onBlur}
       />
     </>
   );

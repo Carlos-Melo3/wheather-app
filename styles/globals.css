@@ -24,19 +24,20 @@ a {
 .container {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  max-width: 1200px;
+  max-width: 1000px;
   background: hsla(0,0%,100%,.95);
   box-shadow: 0 8px 32px 0 rgba(83,89,179,.37);
   backdrop-filter: blur(3px);
   border-radius: 30px;
   overflow: hidden;
+  margin-top: 55px;
 }
 
 @media only screen and (max-width: 950px) {
   .container {
     grid-template-columns: 1fr;
     max-width: 600px;
-    margin: 20px auto;
+    margin: 60px 0px 20px 0px;
   }
 }
 
@@ -139,12 +140,16 @@ img {
 }
 
 h1 {
+  letter-spacing: -0.05em;
   font-size: 42px;
+  font-family: Varela Round,sans-serif;
 }
 
 p {
+  letter-spacing: -0.05em;
   font-size: 18px;
   letter-spacing: -0.075em;
+  font-family: Varela Round,sans-serif;
 }
 
 .screen {
