@@ -30,7 +30,7 @@ a {
   backdrop-filter: blur(3px);
   border-radius: 30px;
   overflow: hidden;
-  margin-top: 10vh;
+  margin: 10vh 0px 3vh 0px;
 }
 
 @media only screen and (max-width: 950px) {
@@ -158,15 +158,6 @@ p {
   font-size: 18px;
   letter-spacing: -0.075em;
   font-family: Varela Round,sans-serif;
-}
-
-.screen {
-  max-width: 350px;
-  text-align: center;
-}
-
-.screen-message {
-  margin-bottom: 30px;
 }
 
 .details {

@@ -15,6 +15,7 @@ import Header from "@/components/Header";
 import { WeatherStatus } from "@/config/status";
 import { ValueContext } from "@/context/value";
 import Button from "@/components/Button";
+import Loading from "@/components/Loading";
 
 export default function Home() {
   const [city, setCity] = React.useState("");
@@ -194,9 +195,7 @@ export default function Home() {
     if (status === WeatherStatus.LOADING) {
       return (
         <>
-          <div className="screen">
-            <h1 className="screen-message">Carregando...</h1>
-          </div>
+          <Loading/>
         </>
       );
     } else {
