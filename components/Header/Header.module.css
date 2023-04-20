@@ -2,7 +2,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 55px;
   display: flex;
   align-items: center;
@@ -38,13 +38,13 @@
   height: auto;
   top: 55px;
   right: 20px;
-  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: hsla(0,0%,100%,.95);
   overflow: hidden;
+  border-radius: 10px;
 }
 
 .itemsDropdown {
@@ -56,7 +56,6 @@
   font-family: Varela Round,sans-serif;
   cursor: pointer;
   pointer-events: auto;
-  z-index: 999;
 }
 
 .itemsDropdown:hover {
@@ -64,13 +63,24 @@
 }
 
 .dropdownOpen {
-  opacity: 1;
-  pointer-events: auto;
-  transition: opacity 0.3s ease-in-out;
+  display: block;
 }
 
 .dropdownClose {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease-in-out;
+  display: none;
+}
+
+.searchContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: hsla(0,0%,100%,.95);
+  overflow: hidden;
+  border-radius: 10px;
+  padding: 0 10px;
+}
+
+.searchIcon {
+  width: 20px;
 }

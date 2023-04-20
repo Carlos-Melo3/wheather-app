@@ -19,6 +19,8 @@ export interface WheatherInfo {
     speed: number;
     deg: number;
   };
+  dt: number;
+  timezone: number;
   visibility: number;
   id: number;
   coord: {

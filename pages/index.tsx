@@ -5,42 +5,39 @@ import { searchChosenCity } from "@/utils/city";
 import {
   getDescriptionPortuguese,
   getSearchIcon,
-  getSunriseAndSunset,
-  getWeekAndTime,
+  getTime,
+  getWeekDay,
   getWindDirection,
 } from "@/utils/functions";
 import { KelvinToCelsius } from "@/utils/format";
 import React from "react";
 import Header from "@/components/Header";
 import { WeatherStatus } from "@/config/status";
+import { ValueContext } from "@/context/value";
+import Button from "@/components/Button";
 
 export default function Home() {
-  const [wheather, setWheather] = React.useState<WheatherInfo>();
-  const date = getWeekAndTime();
   const [city, setCity] = React.useState("");
   const [status, setStatus] = React.useState(WeatherStatus.SUCCESS);
-  const dropdown = [
-    "Brasilia",
-    "São Paulo",
-    "Fortaleza",
-    "Recife",
-  ];
+  const { cities, saveCity, wheather, setWheather } =
+    React.useContext(ValueContext);
 
   const onChangeCityInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCity(event.target.value);
   };
 
   const onKeyEnterCity = async (event: any) => {
-    if(event.keyCode === 13) {
-      setStatus(WeatherStatus.LOADING);
-      const result = await searchChosenCity(city);
-      if(result !== undefined) {
-        setWheather(result);
-        setStatus(WeatherStatus.SUCCESS);
-        setCity("");
-      }
-      else {
-        setStatus(WeatherStatus.ERROR);
+    if (city !== "") {
+      if (event.keyCode === 13) {
+        setStatus(WeatherStatus.LOADING);
+        const result = await searchChosenCity(city);
+        if (result !== undefined) {
+          setWheather(result);
+          setStatus(WeatherStatus.SUCCESS);
+          setCity("");
+        } else {
+          setStatus(WeatherStatus.ERROR);
+        }
       }
     }
   };
@@ -52,36 +49,50 @@ export default function Home() {
   };
 
   const handleElementClick = async (element: string) => {
-    console.log(element);
     setStatus(WeatherStatus.LOADING);
     const result = await searchChosenCity(element);
-    if(result !== undefined) {
+    if (result !== undefined) {
       setWheather(result);
       setStatus(WeatherStatus.SUCCESS);
       setCity("");
-    }
-    else {
+    } else {
       setStatus(WeatherStatus.ERROR);
     }
   };
 
-  if(status === WeatherStatus.SUCCESS) {
-    if(wheather) {
+  const onClickAddCityButton = () => {
+    if (wheather) {
+      saveCity(wheather.name);
+    }
+  };
+
+  const onClickSearchButton = async () => {
+    if (city !== "") {
+      setStatus(WeatherStatus.LOADING);
+      const result = await searchChosenCity(city);
+      if (result !== undefined) {
+        setWheather(result);
+        setStatus(WeatherStatus.SUCCESS);
+        setCity("");
+      } else {
+        setStatus(WeatherStatus.ERROR);
+      }
+    }
+  };
+
+  if (status === WeatherStatus.SUCCESS) {
+    if (wheather) {
       const celsius = KelvinToCelsius(wheather.main.temp);
       const feelsLike = KelvinToCelsius(wheather.main.feels_like);
       const windDirection = getWindDirection(wheather.wind.deg);
-      const sunriseTime = getSunriseAndSunset(
-        wheather.sys.sunrise,
-        wheather.sys.sunset,
-        wheather.coord.lon
-      )[0];
-      const sunsetTime = getSunriseAndSunset(
-        wheather.sys.sunrise,
-        wheather.sys.sunset,
-        wheather.coord.lon
-      )[1];
+      const sunriseTime = getTime(wheather.sys.sunrise, wheather.timezone);
+      const sunsetTime = getTime(wheather.sys.sunset, wheather.timezone);
       const climate = getSearchIcon(wheather.weather[0].icon);
-      const description = getDescriptionPortuguese(wheather.weather[0].description);
+      const description = getDescriptionPortuguese(
+        wheather.weather[0].description
+      );
+      const time = getTime(wheather.dt, wheather.timezone);
+      const weekDay = getWeekDay(wheather.dt, wheather.timezone);
 
       return (
         <>
@@ -90,9 +101,10 @@ export default function Home() {
             value={city}
             onChange={onChangeCityInput}
             onKeyDown={onKeyEnterCity}
-            onClick={onClickCityEmpty}
-            elements={dropdown}
+            onHome={onClickCityEmpty}
+            elements={cities}
             onElement={handleElementClick}
+            onClick={onClickSearchButton}
           />
           <div className="container">
             <div className="main-card">
@@ -146,6 +158,18 @@ export default function Home() {
                   img="/img/sunset.png"
                 />
               </div>
+              <div className="details">
+                <div className="dayAndTime">
+                  <h2 className="date">
+                    {weekDay}, {time}
+                  </h2>
+                </div>
+                <Button
+                  disabled={!cities.includes(wheather.name) ? false : true}
+                  onClick={onClickAddCityButton}
+                  name="Salvar"
+                />
+              </div>
             </div>
           </div>
         </>
@@ -158,15 +182,16 @@ export default function Home() {
             value={city}
             onChange={onChangeCityInput}
             onKeyDown={onKeyEnterCity}
-            onClick={onClickCityEmpty}
-            elements={dropdown}
+            onHome={onClickCityEmpty}
+            elements={cities}
             onElement={handleElementClick}
+            onClick={onClickSearchButton}
           />
         </>
       );
     }
   } else {
-    if(status === WeatherStatus.LOADING) {
+    if (status === WeatherStatus.LOADING) {
       return (
         <>
           <div className="screen">
@@ -174,8 +199,7 @@ export default function Home() {
           </div>
         </>
       );
-    }
-    else {
+    } else {
       <>
         <div className="screen">
           <h1 className="screen-message">
@@ -188,7 +212,7 @@ export default function Home() {
             onKeyDown={onKeyEnterCity}
           />
         </div>
-      </>
+      </>;
     }
   }
 }

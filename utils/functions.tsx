@@ -1,7 +1,5 @@
-export const getWeekAndTime = () => {
-  const currentDate = new Date();
-  const weekNumber = currentDate.getDay();
-  const week = [
+export const getWeekDay = (milliseconds: number, timezone: number) => {
+  const weekday = [
     "Domingo",
     "Segunda-feira",
     "Terça-feira",
@@ -10,46 +8,17 @@ export const getWeekAndTime = () => {
     "Sexta-feira",
     "Sábado",
   ];
-  const dayOfWeek = week[weekNumber];
-  const time = currentDate.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
 
-  return dayOfWeek + ", " + time;
+  return weekday[new Date((milliseconds + timezone) * 1000).getDay()];
 };
 
-export const getSunriseAndSunset = (
-  sunrise: number,
-  sunset: number,
-  lon: number
-) => {
-  const sunriseDate = new Date(sunrise * 1000);
-  const sunsetDate = new Date(sunset * 1000);
+export const getTime = (milliseconds: number, timezone: number) => {
+  const time = new Date((milliseconds + timezone) * 1000)
+    .toISOString()
+    ?.match(/\d{2}:\d{2}/)
+    ?.toString();
 
-  const differenceInHours = Math.trunc((lon + 47.9297) / 15);
-  console.log(differenceInHours);
-
-  const sunriseHours =
-    sunriseDate.getHours() + differenceInHours <= 24
-      ? sunriseDate.getHours() + differenceInHours
-      : sunriseDate.getHours() - differenceInHours;
-  const SunriseAdditionOfZero = sunriseHours < 10 ? "0" + sunriseHours : sunriseHours;
-  const sunriseMinutes =
-    sunriseDate.getMinutes() < 10
-      ? "0" + sunriseDate.getMinutes()
-      : sunriseDate.getMinutes();
-  const sunsetHours = sunsetDate.getHours() + differenceInHours < 0
-    ? 24 + differenceInHours
-    : sunsetDate.getHours() + differenceInHours;
-  const SunsetAdditionOfZero = sunsetHours < 10 ? "0" + sunsetHours : sunsetHours;
-  const sunsetMinutes =
-    sunsetDate.getMinutes() < 10
-      ? "0" + sunsetDate.getMinutes()
-      : sunsetDate.getMinutes();
-  const sunriseTime = SunriseAdditionOfZero + ":" + sunriseMinutes;
-  const sunsetTime = SunsetAdditionOfZero + ":" + sunsetMinutes;
-  return [sunriseTime, sunsetTime];
+  return time;
 };
 
 export const getSearchIcon = (icon: string) => {
