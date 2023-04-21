@@ -49,10 +49,10 @@
 
 .itemsDropdown {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   width: 100%;
-  padding: 5px 0px;
+  padding: 5px 15px;
   font-family: Varela Round,sans-serif;
   cursor: pointer;
   pointer-events: auto;
@@ -81,6 +81,10 @@
   padding: 0 10px;
 }
 
-.searchIcon {
+.element {
+  width: 100%;
+}
+
+.icon {
   width: 20px;
 }

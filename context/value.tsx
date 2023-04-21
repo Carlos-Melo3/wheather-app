@@ -1,9 +1,11 @@
 import { WheatherInfo } from "@/config/interface";
 import React from "react";
+import { classicNameResolver } from "typescript";
 
 interface ValueContextInfo {
   cities: string[];
   saveCity: (city: string) => void;
+  removeCity: (city: string) => void;
   wheather: WheatherInfo | undefined;
   setWheather: React.Dispatch<React.SetStateAction<WheatherInfo | undefined>>;
 }
@@ -40,8 +42,16 @@ export function ValueProvider({ children }: ValueProviderProps) {
     }
   };
 
+  const removeCity = (city: string) => {
+    if(cities.includes(city)) {
+      const result = cities.filter(element => element !== city);
+      console.log(result);
+      setCities(result);
+    }
+  };
+
   return (
-    <ValueContext.Provider value={{ cities, saveCity, wheather, setWheather }}>
+    <ValueContext.Provider value={{ cities, saveCity, removeCity, wheather, setWheather }}>
       {children}
     </ValueContext.Provider>
   );

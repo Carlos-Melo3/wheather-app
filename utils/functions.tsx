@@ -12,8 +12,8 @@ export const getWeekDay = (milliseconds: number, timezone: number) => {
   return weekday[new Date((milliseconds + timezone) * 1000).getDay()];
 };
 
-export const getTime = (milliseconds: number, timezone: number) => {
-  const time = new Date((milliseconds + timezone) * 1000)
+export const getTime = (dt: number, timezone: number) => {
+  const time = new Date((dt + timezone) * 1000)
     .toISOString()
     ?.match(/\d{2}:\d{2}/)
     ?.toString();

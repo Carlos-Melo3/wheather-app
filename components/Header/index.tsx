@@ -1,6 +1,7 @@
 import React from "react";
 import TextField from "../TextField";
 import styles from "./Header.module.css";
+import { ValueContext } from "@/context/value";
 
 interface HeaderProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -12,6 +13,7 @@ interface HeaderProps {
   onClick?: () => void;
   elements?: string[];
   onElement?: (element: string) => void;
+  onRemove?: () => void;
 };
 
 export default function Header({
@@ -24,8 +26,10 @@ export default function Header({
   elements,
   onElement,
   onClick,
+  onRemove,
 }: HeaderProps) {
   const [showDropdown, setShowDropdown] = React.useState(false);
+  const { removeCity } = React.useContext(ValueContext);
 
   const handleTextFieldClick = () => {
     setShowDropdown(true);
@@ -38,6 +42,10 @@ export default function Header({
   const handleElementClick = (city: string) => {
     setShowDropdown(false);
     onElement?.(city);
+  };
+
+  const handleRemoveElement = (element: string) => {
+    removeCity(element);
   };
 
   return (
@@ -55,14 +63,17 @@ export default function Header({
             onKeyDown={onKeyDown}
             disabled={disabled}
           />
-          <div onClick={onClick} className={styles.searchIcon}>
+          <div onClick={onClick} className={styles.icon}>
             <img src="/icon/searchIcon.svg"/>
           </div>
         </div>
         <div className={`${styles.dropdown} ${showDropdown ? styles.dropdownOpen : styles.dropdownClose}`} onMouseOver={handleTextFieldClick} onMouseOut={handleTextFieldBlur}>
           {elements?.map((element) => (
-            <div className={styles.itemsDropdown} key={element} onClick={() => handleElementClick(element)}>
-              <p>{element}</p>
+            <div className={styles.itemsDropdown} key={element}>
+              <p onClick={() => handleElementClick(element)} className={styles.element}>{element}</p>
+              <div onClick={() => handleRemoveElement(element)} className={styles.icon}>
+                <img src="/icon/removeIcon.svg"/>
+              </div>
             </div>
           ))}
         </div>

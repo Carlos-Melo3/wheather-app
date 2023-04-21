@@ -20,7 +20,7 @@ import Loading from "@/components/Loading";
 export default function Home() {
   const [city, setCity] = React.useState("");
   const [status, setStatus] = React.useState(WeatherStatus.SUCCESS);
-  const { cities, saveCity, wheather, setWheather } =
+  const { cities, saveCity, removeCity, wheather, setWheather } =
     React.useContext(ValueContext);
 
   const onChangeCityInput = (event: React.ChangeEvent<HTMLInputElement>) => {
