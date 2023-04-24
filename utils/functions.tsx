@@ -1,5 +1,6 @@
 export const getWeekDayAndTime = (timezone: number) => {
-  const differenceTime = parseInt(((timezone / 3600) + 3).toFixed());
+  const timezoneOffset = (new Date().getTimezoneOffset() / 60);
+  const differenceTime = parseInt(((timezone / 3600) + timezoneOffset).toFixed());
   let hours = new Date().getHours() + differenceTime;
   const minutes = new Date().getMinutes();
   let index = new Date().getDay();
