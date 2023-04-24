@@ -1,5 +1,9 @@
-export const getWeekDay = (milliseconds: number, timezone: number) => {
-  const weekday = [
+export const getWeekDayAndTime = (timezone: number) => {
+  const differenceTime = parseInt(((timezone / 3600) + 3).toFixed());
+  let hours = new Date().getHours() + differenceTime;
+  const minutes = new Date().getMinutes();
+  let index = new Date().getDay();
+  const daysWeek = [
     "Domingo",
     "Segunda-feira",
     "Terça-feira",
@@ -9,7 +13,15 @@ export const getWeekDay = (milliseconds: number, timezone: number) => {
     "Sábado",
   ];
 
-  return weekday[new Date((milliseconds + timezone) * 1000).getDay()];
+  if(hours >= 24) {
+    hours = hours - 24;
+  }
+
+  if(hours >= 0 && hours < 12 && differenceTime >= 12) {
+    index++;
+  }
+
+  return daysWeek[index] + ", " + (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes);
 };
 
 export const getTime = (dt: number, timezone: number) => {

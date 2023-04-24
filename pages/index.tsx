@@ -6,7 +6,7 @@ import {
   getDescriptionPortuguese,
   getSearchIcon,
   getTime,
-  getWeekDay,
+  getWeekDayAndTime,
   getWindDirection,
 } from "@/utils/functions";
 import { KelvinToCelsius } from "@/utils/format";
@@ -92,8 +92,7 @@ export default function Home() {
       const description = getDescriptionPortuguese(
         wheather.weather[0].description
       );
-      const time = getTime(wheather.dt, wheather.timezone);
-      const weekDay = getWeekDay(wheather.dt, wheather.timezone);
+      const date = getWeekDayAndTime(wheather.timezone);
 
       return (
         <>
@@ -162,7 +161,7 @@ export default function Home() {
               <div className="details">
                 <div className="dayAndTime">
                   <h2 className="date">
-                    {weekDay}, {time}
+                    {date}
                   </h2>
                 </div>
                 <Button

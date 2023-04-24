@@ -19,16 +19,16 @@ export const ValueContext = React.createContext({} as ValueContextInfo);
 export function ValueProvider({ children }: ValueProviderProps) {
   const [wheather, setWheather] = React.useState<WheatherInfo | undefined>();
   const [ cities, setCities ] = React.useState<string[]>([
-    "Belo Horizonte",
-    "Boa Vista",
-    "Brasília",
-    "Curitiba",
-    "Florianópolis",
-    "Fortaleza",
-    "Manaus",
-    "Rio de Janeiro",
-    "Salvador",
     "São Paulo",
+    "New York",
+    "Tokyo",
+    "Alaska",
+    "Italy",
+    "Roma",
+    "Australia",
+    "Rio de Janeiro",
+    "El Salvador",
+    "Paris",
   ]);
 
   const saveCity = (city: string) => {

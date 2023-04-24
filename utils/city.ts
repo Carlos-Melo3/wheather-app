@@ -15,7 +15,5 @@ export const searchChosenCity = async (city: string) => {
       console.error("ops! ocorreu um erro : " + err);
     });
 
-  console.log(result);
-
   return result;
 };
