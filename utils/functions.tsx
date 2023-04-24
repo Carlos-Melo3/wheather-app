@@ -18,7 +18,7 @@ export const getWeekDayAndTime = (timezone: number) => {
     hours = hours - 24;
   }
 
-  if(hours >= 0 && hours < 12 && differenceTime >= 12) {
+  if(hours >= 0 && hours < 12 && differenceTime >= 4) {
     index++;
   }
 
