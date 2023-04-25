@@ -1,6 +1,5 @@
 import MetricsCard from "@/components/MetricsCard";
 import TextField from "@/components/TextField";
-import { WheatherInfo } from "@/config/interface";
 import { searchChosenCity } from "@/utils/city";
 import {
   getDescriptionPortuguese,
