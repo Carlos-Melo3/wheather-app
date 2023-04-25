@@ -2,12 +2,10 @@ import { api } from "@/config/api";
 import { WheatherInfo } from "@/config/interface";
 
 export const searchChosenCity = async (city: string) => {
-  const apiKey = process.env.API_KEY;
-  
   let result: WheatherInfo | undefined;
 
   await api
-    .get(`/weather?q=${city}&appid=${apiKey}`)
+    .get(`/weather?q=${city}`)
     .then((response) => {
       result = response.data;
     })

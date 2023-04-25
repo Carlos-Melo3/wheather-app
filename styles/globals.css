@@ -172,3 +172,12 @@ p {
   display: flex;
   align-items: center;
 }
+
+.screen {
+  max-width: 350px;
+  text-align: center;
+}
+
+.screen-message {
+  margin-bottom: 30px;
+}

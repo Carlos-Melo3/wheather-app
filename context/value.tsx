@@ -1,6 +1,5 @@
 import { WheatherInfo } from "@/config/interface";
 import React from "react";
-import { classicNameResolver } from "typescript";
 
 interface ValueContextInfo {
   cities: string[];
@@ -32,11 +31,9 @@ export function ValueProvider({ children }: ValueProviderProps) {
   ]);
 
   const saveCity = (city: string) => {
-    if(!cities.includes(city)) {
+    if (!cities.includes(city)) {
       const result = [...cities];
-      if(result.length > 9) {
-        result.shift();
-      }
+      if (result.length > 9) result.shift();
       result.push(city);
       setCities(result);
     }
